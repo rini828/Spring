@@ -1,0 +1,188 @@
+SpringFramework
+SpringBoot
+
+https://spring.io/
+SpringFramework => Spring + Framework
+
+ - Framework: 어떤 대상을 구성하는 구조/틀 사용한 작업
+	=> (SW) 기능을 클래스/인터페이스 형태로 미리
+	    구현해놓은 형태를 사용하는 것
+
+ 	EJB 	=> 	Spring Framework
+      서버중심		클라이언트중심(모바일등장)
+      확장성,유지보수 	생산성,안정성	
+      중량프레임워크	경량프레임워크
+                        (확장성-다른프레임워크의 포용)
+
+ * 스프링 주요 개념/특징
+  - EJB보다 가볍고,배우기쉽다.
+  - 제어의 역행 기술을 사용해서 애플리케이션간의 느슨한 결합을 제어한다 .
+    (Inversion Of Control,IoC)
+  - 의존성 주입 기능을 사용가능.
+    (Dependecy Injection, DI)
+  - 관점지향 프로그래밍을 지원
+    (Asepect-Oriented Programming, AOP)
+  - 영속성 관련 다양한 서비스 지원
+    (Presistence)
+  - 다양한 라이브러리 지원
+  - POJO기반의 구성
+    (Plain Old Java Object)
+
+
+  * 스프링 주요 기능
+Spring Core : 다른 기능과 설정을 분리하기위한 IoC기능 제공
+Spring Context : 스프링 기본기능, 애플리케이션에 있는 기능(빈-객체)을
+                 접근하도록 기능을 제공    
+Spring DAO :JDBC기능을 좀 더 편리하게 사용
+Spring ORM :영속성관련 프레임워크 연동기능제공(하이버네이트,마이바티스)
+Spring AOP : 관점지향 프로그래밍을 지원
+Spring Web : 웹 개발에 필요한 기능을 제공
+Spring WebMVC : 스프링MVC관련 기능 제공 
+
+
+ - Spring Legacy Project
+   was사용경험, Model2방식 개발
+   아직까지 실무에서 사용빈도가 높음(이전코드)
+   구글링이 쉬움(자료가 많다)
+   모든 버전의 스프링을 사용가능
+   
+   초반설정 및 세팅이 어려움   
+   
+ - Spring Starter Project(Boot)
+   초반설정 및 세팅이 쉬움(기본제공)
+   내장서버를 보유하고 있음 => 로딩시간이 짧음
+   별도의 버젼을 설정하지 않아도됨(라이브러리별 호환성 높음)
+   
+   기존의 방식과 다른 형태로 개발,JSP 뷰사용 다소어려움
+   
+   
+   * Presentation Layer : UI를 구성하는 부분 (웹,모바일)
+                         => html,css,js,jsp, Controller   
+   * Business Layer : 서비스 계층, 요구사항을 구현하는 부분
+                       => XXX Action
+   * Data Access Layer : 영속 계층, 데이터 처리를 수행하는 부분
+                        => XXX DAO
+   * DataBase
+             => Mysql,Orcale...
+             
+             
+    요청	->	Controller -> Service -> DAO -> MyBatis -> DB 
+    (request)    	|
+    			  View     
+    			  
+    			  
+   https://mybatis.org/mybatis-3/ko/index.html
+      
+   마이바티스는 무엇인가?
+	마이바티스는 개발자가 지정한 SQL, 저장프로시저 그리고 몇가지 고급 매핑을 
+	지원하는 퍼시스턴스 프레임워크이다. 마이바티스는 JDBC로 처리하는 상당부분의 코드와
+	파라미터 설정및 결과 매핑을 대신해준다. 마이바티스는 데이터베이스 레코드에 
+	원시타입과 Map 인터페이스 그리고 자바 POJO 를 설정해서 매핑하기 위해 XML과 
+	애노테이션을 사용할 수 있다. 			  
+    
+   => 기존에 JDBC단점을 보완하는 프레임워크 
+     - try-catch-finally 생략
+     - pstmt,rs 데이터 입력 생략
+     - SQL 구문을 분리
+     - Spring과 연동이 자동
+     - 동적 SQL 지원
+ 
+
+
+    import org.springframework.jdbc.datasource.DriverManagerDataSource;
+    DriverManagerDataSource  dataSource = new DriverManagerDataSource();
+    
+      | | 같은 의미
+       
+	<bean id="dataSource" 
+	      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	
+	</bean>	
+
+    dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+       | | 같은 의미    
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/> 
+	
+	* 의존 객체 자동 주입:개발자가 주입대상을 명시하지 않아도 자동으로 연결(스프링 컨테이너) 
+	
+	@Resource : Java에서 지원하는 어노테이션 (특정 프레임워크에 비종속적이다)
+	         - 의존 객체를 찾는 순서
+	          [이름] -> [타입] -> [@Qualifier] -> 실패
+	         - 멤버변수, set메서드에서만 사용가능 
+	
+	@Inject : Java에서 지원하는 어노테이션 (특정 프레임워크에 비종속적이다)
+	         - 의존 객체를 찾는 순서
+	          [타입] -> [@Qualifier] -> [이름] -> 실패
+	         - 빌드 도구(Maven)를 사용해서 해당 라이브러리 의존성 추가(필수) 
+	         - 멤버변수,set메서드,생성자,일반메서드 사용가능
+	
+	@Autowired : Spring에서 지원하는 어노테이션 (Spring에 종속적이다)
+	         - 의존 객체를 찾는 순서
+	          [타입] -> [이름] -> [@Qualifier] -> 실패 
+			 - 반드시 스프링에서만 사용
+			 - 멤버변수,set메서드,생성자,일반메서드 사용가능
+	
+	@Qualifier : 주입하려는 대상이 여러개 있을때 해당 대상을 구분하기위한 값
+	           - @Qualifier 설정한 객체가 없을경우 Exception 발생
+	
+	<bean id="dataSource" 
+	      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	      <qualifier value="ds1">
+	      ... 
+	</bean>	
+	
+	<bean id="dataSource" 
+	      class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		  <qualifier value="ds2">
+	      ... 
+	</bean>	
+	
+	-----------------------------------------------
+	@Autowired @Qualifier("ds2")
+	private DataSource ds;
+	
+	
+1130
+
+	* DAO -> MyBatis -> DB + Test(Junit) 
+	
+	1) XML을 사용하여 SQL작성, DAO 객체생성하여 연결
+	  - SQL구문 수정 및 유지보수가 우수함(컴파일X)
+	  - 개발시 코드의 양이 증가(복잡도 증가)
+	
+	2) 어노테이션을 사용해서 SQL작성, DAO 인터페이스를 생성해서 연결
+	  - DAO 객체 없이 인터페이스만으로 처리(생산성 증가)
+	  - SQL 변경시 매번 컴파일 해야하는 단점
+	
+	3) XML/어노테이션 사용 SQL 작성, DAO객체 생성해서 연결
+	  - SQL 작성시 간단-어노테이션,복잡-XML 사용하여 처리
+	  - 개발자의 역량에 따른 큰 차이가 발생가능하다
+	  
+	우리는 1번할거야 해야할 일은 많지만 유지보수가 우수해요~  
+	
+	
+	도메인 : 프로젝트에 중요한 단어(용어) => 물리적인 환경으로 분리가능한 단위
+		ex) 쇼핑몰 -> 회원, 상품, 관리자, 주문, 장바구니 ... (1차 도메인)
+					  이름
+					  전화번호.. (2차 도메인)
+	
+	* MyBatis 개발 사용 순서
+	  - 1) 데이터베이스 생성 (계정)
+	  - 2) 테이블 생성, 설정준비
+	  - 3) 도메인 객체(클래스) 생성 => DTO/VO생성
+	       우리는 이제 DTO 자리에 VO 라는 개념을 쓸거래
+	  - 4) DAO 인터페이스 생성
+	  - 5) 인터페이스에 구현해야하는 동작을 추상메서드로 선언
+	  - 6) XML(Mapper) 생성, 위치(저장경로-namespace) 설정
+	  - 7) XML mapperDTO 추가
+	  - 8) SQL 구문 작성(태그형태)
+	  - 9) XML(mapper) 정보를 MyBatis에서 인식하도록 설정
+	  - 10) DAO 객체 생성 (인터페이스 구현 객체를 만들어서)
+	  - 테스트 동작 수행	
+	
+	
+	
+
+
+
+
