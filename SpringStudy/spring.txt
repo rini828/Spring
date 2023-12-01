@@ -181,8 +181,44 @@ Spring WebMVC : 스프링MVC관련 기능 제공
 	  - 테스트 동작 수행	
 	
 	
+1201
 	
+	* log4j : 로그출력 기능 (레벨별 출력 기능)
+	
+	  1			2		3		4		5		6	
+	TRACE	  DEBUG	   INFO	  WARN	  ERROR	  FATAL
+
+	TRACE(1) : DEBUG 보다 상세한 로그정보를 출력
+	DEBUG(2) : 개발시 디버깅용도 사용하는 출력 레벨
+	INFO(3) : 실제 서비스 운영과 관련된 정보출력 레벨
+	WARN(4) : 시스템 오류의 원인을 출력하는 레벨
+	ERROR(5) : 실행중 문제가 발생한경우 출력하는 레벨
+	FATAL(6) : 시스템 환경 자체의 심각한 문제를 출력하는 레벨
+	
+	=> 출력 설정한 레벨보다 높은 레벨의 메세지만 출력됨
+	
+	
+	https://logging.apache.org/log4j/1.2/manual.html
 
 
 
-
+	~ memberMapper.xml ~
+	<!-- 회원가입 -->
+  	<insert id="">
+  		insert into tbl_member(userid,userpw,username,useremail)
+  		valus(#{userid},#{userpw},#{username},#{useremail})
+  	</insert>
+  	
+  	#{userid} => ?에 값을 담았던 동작 수행
+  				 pstmt.setString("userid")
+  	
+  	select만 (rs) resultType="string" 같은거 쓰고
+  	insert update delete는 안 써도 된다
+  	
+  	vo 이름이랑 컬럼명이 같은 덕분에 #{userid}는 상황에 따라
+  	vo.setUserid();
+  	vo.getUserid(); 둘 다 된다
+  	
+  	
+  	
+  	

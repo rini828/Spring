@@ -12,7 +12,10 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.itwillbs.web">
-		<level value="info" />
+		<level value="DEBUG" />
+	</logger>
+	<logger name="com.itwillbs.persistence">
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
@@ -34,7 +37,7 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="info" />
+		<priority value="debug" />
 		<appender-ref ref="console" />
 	</root>
 	
