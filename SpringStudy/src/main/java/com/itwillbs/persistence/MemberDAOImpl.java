@@ -40,6 +40,7 @@ public class MemberDAOImpl implements MemberDAO {
 		//sqlSession.selectOne("SQL구문의 위치정보");
 		String time =
 		sqlSession.selectOne("com.itwillbs.mapper.Membermapper.getTime");
+		// 셀렉트의 리턴타입이 모두 보이드거나 없다 = 셀렉트 사용x (커서 둬보기)
 		// memberMapper.xml 의 namespace 복붙 = mapper
 		// 뒤에 .getTime = SQLID
 		// 하면 myBatis가 알아서 찾아감
