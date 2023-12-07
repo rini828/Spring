@@ -220,5 +220,58 @@ Spring WebMVC : 스프링MVC관련 기능 제공
   	vo.getUserid(); 둘 다 된다
   	
   	
+ 
+ 
+ 1204
+ 
+ 		요청	->	 Controller	->	Service	->	DAO	->	MyBatis	->	DB
+ 	  (Request) 		 |
+  					   View
+  					   
+  	* Controller
+  	[ 스프링 MVC에서 기본적으로 처리하는 작업 ]
+  	- URI를 분석해서 적절한 컨트롤을 찾는 작업 (~.me, ~.bo)
+  	- 컨트롤러에 필요한 메서드를 호출 (기존동작 if~제어)
+  	- 컨트롤러의 데이터(결과)를 뷰페이지로 전달 (기존	request영역저장+forward)
+  	- URI에 따른 뷰페이지 연결 (기존 ActionForward-path)
+  	- 파라미터를 자동으로 수집(VO/DTO)
+  	- 테스트 / 개발로직에 집중가능
+  	
+  	[ 개발자가 수행하는 작업 ]
+  	- 특정 URI에 동작하는 컨트롤러 설계(매핑)
+  	- 서비스 객체 생성 (기존의 액션)
+  	- DAO 객체 생성
+  	- 컨트롤러 내부에 동작을 처리하는 메서드 설계
+  	- 전달받은 데이터를 뷰페이지에 출력
+  	
+  	
+  	
+1207
+
+	@RequestParam : 주소줄에 있는 이름(key)을 가진 데이터 값(value)을 가져오는 동작
+	(1:1)
+		
+	@ModelAttribute : 주소줄에 있는 이름(key)을 가진 데이터 값(value,bean,Collection)을 가져오는 동작
+	(1:N 관계)			=> Model 객체에 담아서 정보를 뷰페이로 전달
+	
+	Model : view페이지로 정보를 전달하는 객체, 데이터를 이름과 값(value,bean,Collection)을 저장
+	(1:N 관계)
+	
+		* Model.addAttribute() 	vs 	@ModelAttribute
+			메서드단위				 컨트롤러 단위
+ 	 	key,value를 Model저장		key,value 전달된 정보를 객체 생성
+									-> Model 객체에 전달(덮어쓰기)
+		 => 뷰페이지 전달			=> 뷰페이지 전달 
+	
+	
+	RedirectAttributes 
+	객체의 차이라기보다 동작의 차이
+		addAttribute(); : URI에 표시O / Model,RedirectAttributes 모두 사용 / F5 정보 유지
+		addFlashAttribute(); : URI에 표시X / RedirectAttributes만 사용 / F5 정보 사라짐
+		
+		
+	- 책 : 125 ~ 148 page
+		
+  	
   	
   	

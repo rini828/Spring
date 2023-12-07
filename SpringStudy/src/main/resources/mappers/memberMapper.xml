@@ -41,4 +41,10 @@
 	</delete>
 
 
+	<!-- 회원정보 리스트 -->
+	<select id="getList" resultType="com.itwillbs.domain.MemberVO">
+		select * from tbl_member
+	</select>
+
+
   </mapper>

@@ -1,5 +1,7 @@
 package com.itwillbs.web;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
@@ -91,7 +93,7 @@ public class MemberDAOTest {
 	public void 회원정보_수정_테스트() {
 		logger.debug("회원정보_수정_테스트()");
 		MemberVO uvo = new MemberVO();
-		uvo.setUserid("admin");
+		uvo.setUserid("admin1");
 		uvo.setUserpw("1234");
 		uvo.setUsername("수정이름");
 		
@@ -99,7 +101,7 @@ public class MemberDAOTest {
 		mdao.updateMember(uvo);
 	}
 	
-	@Test
+//	@Test
 	public void 회원정보_삭제_테스트() {
 		logger.debug("회원정보_삭제_테스트()");
 		MemberVO dvo = new MemberVO();
@@ -108,6 +110,28 @@ public class MemberDAOTest {
 		mdao.deleteMember(dvo);
 		
 	}
+	
+	
+	// 회원정보 리스트 조회
+	@Test
+	public void 회원정보리스트조회_테스트() {
+		logger.debug("회원정보리스트조회_테스트()");
+
+		List<MemberVO> memberList = mdao.getMemberList();
+		
+		logger.debug(""+memberList);
+		
+		for(MemberVO vo :memberList) {
+			logger.debug("id : "+vo.getUserid()+"//pw :"+vo.getUserpw());
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
