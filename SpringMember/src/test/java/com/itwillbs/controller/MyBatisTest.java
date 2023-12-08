@@ -3,6 +3,7 @@ package com.itwillbs.controller;
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,8 @@ public class MyBatisTest {
 	
 	@Inject
 	private SqlSession sqlSession;
-
+	
+	@Test
 	public void connectTest() {
 		logger.debug(sqlSession+"");
 	}
