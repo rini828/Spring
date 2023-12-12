@@ -1,5 +1,7 @@
 package com.itwillbs.persistence;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -38,6 +40,37 @@ public class MemberDAOImpl implements MemberDAO {
 		return resultVO;
 	}
 
+	
+	@Override
+	public MemberVO getMember(String userid) {
+		logger.debug(" DAO - 회원정보 조회 getMember(String userid) ");
+		return sqlSession.selectOne(NAMESPACE + ".getMember", userid);
+	}
+
+
+	@Override
+	public void updateMember(MemberVO vo) {
+		logger.debug(" updateMember(MemberVO vo)  ");
+		
+		sqlSession.update(NAMESPACE + ".updateMember", vo);
+	}
+	
+
+	@Override
+	public int deleteMember(MemberVO vo) {
+		logger.debug(" deleteMember(MemberVO vo) ");
+		
+		return sqlSession.delete(NAMESPACE + ".deleteMember", vo);
+	}
+	
+
+	@Override
+	public List<MemberVO> getMemberList() {
+		logger.debug("  memberList() ");
+		
+		return sqlSession.selectList(NAMESPACE+".getMemberList");
+	}
+	
 	
 	
 }

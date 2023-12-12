@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	  <h1>http://localhost:8088/members/login 호출</h1>
+<!-- 	  http://localhost:8088/members/login 호출 -->
 	  <h1>/views/members/login.jsp</h1>
 	  
 	  <fieldset>

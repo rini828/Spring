@@ -1,5 +1,7 @@
 package com.itwillbs.service;
 
+import java.util.List;
+
 import com.itwillbs.domain.MemberVO;
 
 /**
@@ -18,6 +20,17 @@ public interface MemberService {
 	// 로그인 처리동작
 	public MemberVO memberLogin(MemberVO vo);
 	
-	
+	// 회원정보 조회 동작
+	public MemberVO memberInfo(String userid);
 
+	// 회원정보 수정 동작
+	public void memberUpdate(MemberVO vo);
+	
+	// 회원정보 삭제 동작
+	public int memberDelete(MemberVO vo);	
+	
+	// 회원목록 조회 동작
+	public List<MemberVO> memberList();
+	
+	
 }
