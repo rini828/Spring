@@ -25,10 +25,10 @@
     </select>
     
     <!-- 회원정보 수정 -->
-    <select id="updateMember">
+    <update id="updateMember">
     	update tbl_member set username=#{username},useremail=#{useremail},updatedate=now() 
     	where userid=#{userid} and userpw=#{userpw}    	
-    </select>
+    </update>
     
     <!-- 회원정보 삭제 -->
     <delete id="deleteMember">
