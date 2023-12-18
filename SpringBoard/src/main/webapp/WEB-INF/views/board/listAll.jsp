@@ -52,15 +52,27 @@ ${result }
 </div>
 
 
+
 <script type="text/javascript">
-	// JSP(java) / JSTL,EL / HTML / JavaScript
-	// alert("${result}");
+	// JSP(java) / JSTL,EL / HTML / JavaScript 
+	
+	//alert("${result}");
 	var result = "${result}";
 	
 	if(result == "CREATEOK"){
-		alert("글 쓰기 완료!");
+		alert(" 글 쓰기 완료! ");
 	}
+	if(result == "modifyOK"){
+		alert(" 글 수정 완료! ");
+	}
+	if(result == "removeOK"){
+		alert(" 글 삭제 완료! ");		
+	}
+  
+
 </script>
+
+
 
 
 <%@ include file="../include/footer.jsp"%>

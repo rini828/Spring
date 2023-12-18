@@ -12,6 +12,11 @@ public interface BoardService {
 	
 	public BoardVO getBoard(int bno) throws Exception;
 	
+	public int boardModify(BoardVO vo) throws Exception;
+	
+	public void incrementViewCnt(int bno) throws Exception;
+	
+	public void boardRemove(int bno) throws Exception;
 	
 	
 }

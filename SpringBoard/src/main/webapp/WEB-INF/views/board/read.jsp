@@ -63,6 +63,11 @@
  			formObj.submit(); 			
  		});
  		
+ 		// 삭제 버튼 클릭시, 글번호를 사용해서 삭제 처리
+ 		$(".btn-danger").click(function(){
+ 			formObj.attr("action","/board/remove");
+ 			formObj.submit();
+ 		});
  		
  		
  		

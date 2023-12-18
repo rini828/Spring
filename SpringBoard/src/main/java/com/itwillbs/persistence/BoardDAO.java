@@ -12,4 +12,11 @@ public interface BoardDAO {
 	
 	public BoardVO getBoard(int bno) throws Exception;
 	
+	public int updateBoard(BoardVO vo) throws Exception;
+	
+	public void updateViewCnt(int bno) throws Exception;
+	
+	public void deleteBoard(int bno) throws Exception;
+	
+	
 }

@@ -273,5 +273,21 @@ Spring WebMVC : 스프링MVC관련 기능 제공
 	- 책 : 125 ~ 148 page
 		
   	
+ 1218
+ 	* 관점지향 프로그래밍 (AOP -Aspect Oriented Programming)
+ 	  => 구현해야하는 기능을 분리(주기능/보조기능)
+ 	     선택적으로 요소에 적용해서 사용
+ 	  => 개발자는 개발에만 포커스
+ 	     
+   보조기능 (로깅,보안,트랜잭션,예외처리....)
+ 	
+ 	 	
+  	* AOP 용어
+  	- aspect : 구현하고자 하는 보조기능
+  	- advice : aspect의 실체 (구현한 객체/클래스)
+  	- joinpoint : advice를 적용하는 지점(결합점) / 메서드 결합점 사용
+	- pointcut : advice가 적용되는 대상을 지정
+	- target : advice가 적용되는 대상(클래스/객체) 
+	- weaving : advice를 주기능에 적용하는 것  	
   	
   	
