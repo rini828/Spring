@@ -6,6 +6,16 @@
   
   <mapper namespace="com.itwillbs.mapper.BoardMapper">
   
+  <!-- 프로퍼티명과 컬럼명이 동일할때 생략가능 -->
+  <resultMap type="com.itwillbs.domain.BoardVO" id="board">
+  		<result property="bno" column="bno" />
+  		<result property="title" column="title" />
+  		<result property="content" column="content" />
+  		<result property="writer" column="writer" />
+  		<result property="regdate" column="regdate" />
+  		<result property="viewcnt" column="viewcnt" />
+  </resultMap>  
+  
   <!-- 글쓰기 -->
   <insert id="insertBoard">
   		insert into tbl_board (title,content,writer)
@@ -41,7 +51,13 @@
   		where bno = #{bno}  	
   </delete>
   	 	
-  	
+   	<!--글 목록 조회(page) -->
+  	<select id="listPage" resultType="BoardVO" resultMap="board">
+  		select * from tbl_board 
+<!--   		order by bno desc,regdate desc  -->
+  		<!-- limit #{page},#{pageSize} --> 	
+  		limit #{startPage},#{pageSize} 	
+  	</select>	
   	  	
   	
   </mapper>

@@ -3,6 +3,7 @@ package com.itwillbs.service;
 import java.util.List;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 
 public interface BoardService {
 	
@@ -18,5 +19,6 @@ public interface BoardService {
 	
 	public void boardRemove(int bno) throws Exception;
 	
+	public List<BoardVO> boardListPage(Criteria cri) throws Exception;
 	
 }

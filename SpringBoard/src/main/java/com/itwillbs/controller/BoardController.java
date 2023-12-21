@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.PageVO;
 import com.itwillbs.service.BoardService;
 
 @Controller
@@ -152,8 +154,58 @@ public class BoardController {
 	}
 	
 	
+	/**
+	 * 페이징처리
+	 * 0) 반드시 GET방식으로만 처리!
+	 * 1) 원하는 만큼의 데이터를 가져와서 출력
+	 * 2) 페이지 블럭 생성
+	 * 3) 본문/수정/삭제등..처리후 리스트 이동시
+	 *    기존의 정보를 유지
+	 *    
+	 * a태그 : 네이버 쇼핑 / 유사한 코드의 반복적인 동작 수행
+	 * 	   => 검색엔진 노출이 쉬움
+	 * 
+	 * form태그 : 쿠팡 / input태그를 사용해서 처리
+	 *     => 데이터처리 (빠른 처리)
+	 * 
+	 */
 	
+	// http://localhost:8088/board/listPage
+	// http://localhost:8088/board/listPage?page=1
+	// http://localhost:8088/board/listPage?pageSize=20
+	// http://localhost:8088/board/listPage?page=3&pageSize=15
 	
-	
+	// 게시판 리스트 - GET
+	@RequestMapping(value = "/listPage", method = RequestMethod.GET)
+	public String listPageGET(Model model,
+								@ModelAttribute("result") String result,
+								HttpSession session,
+								Criteria cri) throws Exception {
+		logger.debug(" /board/listPage -> listPageGET() ");
 
-}
+		session.setAttribute("viewcntCheck", true);
+		
+//		Criteria cri = new Criteria();
+//		cri.setPage(5);
+//		cri.setPageSize(5);
+
+		// 서비스 - 디비에 저장된 글을 가져오기
+		List<BoardVO> boardList = bService.boardListPage(cri);
+		//logger.debug(" @@@ " + boardList);
+
+		
+		// 페이지 블럭 정보 준비 -> view 페이지 전달
+		PageVO pageVO = new PageVO();
+		pageVO.setCri(cri);
+		pageVO.setTotalCount(384); // 디비에서 직접 실행결과 가져오기
+		
+		logger.debug(" 확인 :"+pageVO);
+		model.addAttribute("pageVO", pageVO);
+		// 데이터를 연결된 뷰페이지로 전달(Model)
+		model.addAttribute("boardList", boardList);
+		// model.addAttribute("boardList", bService.boardListAll());
+
+		return "/board/listAll";
+	}
+
+} // controller

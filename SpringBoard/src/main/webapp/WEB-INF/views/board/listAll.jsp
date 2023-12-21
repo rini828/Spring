@@ -5,7 +5,9 @@
 
 <h1>/board/listAll.jsp</h1>
 
-${result }
+${result } <br>
+${pageVO } <br>
+
 
 <div class="box">
 	<div class="box-header with-border">
@@ -43,10 +45,10 @@ ${result }
 	<div class="box-footer clearfix">
 		<ul class="pagination pagination-sm no-margin pull-right">
 			<li><a href="#">«</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">»</a></li>
+			
+			<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }" step="1">
+				<li><a href="/board/listPage?page=${i }">${i }</a></li>
+			</c:forEach>
 		</ul>
 	</div>
 </div>
