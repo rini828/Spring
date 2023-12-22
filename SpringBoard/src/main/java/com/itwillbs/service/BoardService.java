@@ -21,4 +21,6 @@ public interface BoardService {
 	
 	public List<BoardVO> boardListPage(Criteria cri) throws Exception;
 	
+	public int totalBoardCount() throws Exception;
+
 }
