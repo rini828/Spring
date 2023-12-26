@@ -14,10 +14,12 @@
 		<h2> 이름 : ${paramMap.username } </h2>
 		<c:forEach var="fileName" items="${paramMap.fileList }">
 		    <h2> 파일명 : <a href="/download?fileName=${fileName }">${fileName }</a></h2>
+		
+		<hr>
+		<img src="/download?fileName=${fileName }">
 		</c:forEach>
 		
 		<a href="/fileUpload">다시 업로드 하기</a>
-		
 
 </body>
 </html>

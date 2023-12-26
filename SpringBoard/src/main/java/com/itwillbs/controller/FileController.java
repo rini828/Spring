@@ -126,34 +126,36 @@ public class FileController {
 		fileName = URLEncoder.encode(fileName,"UTF-8");
 		
 		// 썸네일 처리 동작 ---------------------------------------
-		int lastIdx = fileName.lastIndexOf(".");  // test[. 인덱스]jpg
-		String tmpFileName = fileName.substring(0, lastIdx);  // test
+		// 1. 썸네일 파일 생성(폴더), 화면에 원본데이터 출력
+//		int lastIdx = fileName.lastIndexOf(".");  // test[. 인덱스]jpg
+//		String tmpFileName = fileName.substring(0, lastIdx);  // test
 		
-		File thumbFile = new File("D:\\springupload\\thumb\\"+tmpFileName+".png");
+//		File thumbFile = new File("D:\\springupload"+"\\thumb\\"+tmpFileName+".png");
 		
-		if(thumbFile.exists()) {
-			thumbFile.getParentFile().mkdirs();
-			Thumbnails.of(file).size(50, 50).outputFormat("png").toFile(thumbFile);
+		if(file.exists()) {
+//			thumbFile.getParentFile().mkdirs();
+//			Thumbnails.of(file).size(50, 50).outputFormat("png").toFile(thumbFile);
+
+		// 2. 썸네일 파일을 바로 생성해서 화면에 출력
+			Thumbnails.of(file).size(50, 50).outputFormat("png").toOutputStream(out);
 		}
 		
 		// 썸네일 처리 동작 ---------------------------------------
 		
 		
 		// 다운로드 창의 형태로 다운로드 되도록 설정
-		response.setHeader("Cache-Control", "no-cache");
-		response.addHeader("Content-disposition", "attachment; fileName="+fileName);
+//		response.setHeader("Cache-Control", "no-cache");
+//		response.addHeader("Content-disposition", "attachment; fileName="+fileName);
 		
-		FileInputStream fis = new FileInputStream(file);
-		byte[] buffer = new byte[1024*8];
 		
-		int data = 0;
-		while( (data = fis.read(buffer)) != -1) {
-			out.write(buffer,0,data);
-		}
-		out.flush(); // 공백채워서 전달
-		
-		fis.close();
-		out.close();
+//		  FileInputStream fis = new FileInputStream(file); byte[] buffer = new
+//		  byte[1024*8];
+		  
+//		  int data = 0; while( (data = fis.read(buffer)) != -1) {
+//		  out.write(buffer,0,data); } out.flush(); // 공백채워서 전달
+		  
+//		  fis.close(); out.close();
+		 
 	}
 	
 	
