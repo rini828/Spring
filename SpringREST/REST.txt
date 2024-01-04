@@ -1,0 +1,60 @@
+REST.txt
+
+ URL : http://localhost:8080/member/join => 해당 리소스를 사용방법(찾아가는 방법) 
+ URI : /member/join  => 리소스
+
+REST (REpersentational State Transfer) : 하나의 주소(URI)는 하나의 고유한 데이터(리소스)를 대표한다
+  =>  URL을 설계하는 방법 
+  
+  
+  이전 웹 : 서버에서 생성된 데이터를 브라우저에서 출력
+     ||
+  요즘 웹 : 서버에서 생성된 데이터를 다양한 기기(웹/모바일)에 사용 (데이터만 전달)
+  
+  https://learn.microsoft.com/ko-kr/azure/architecture/best-practices/api-design
+  https://www.youtube.com/watch?v=RP_f5dMoHFc
+ * REST API 특징
+    - 서버/클라이언트 구조
+    - 무상태
+    - 캐시처리 가능
+    - 계층화
+    - 인터페이스 일관성
+    
+   
+  * REST API를 사용하는 방법
+   - 주소만보고 해당 요청의 내용을 파악가능 해야함
+   - URL 작성시에 동사 -> 명사 사용해야함
+     ex) /getMember?id=10 (x)
+         /member/1  (o)
+   - URL 작성시 동작은(동사) HTTP 메서드로 결정
+     - GET/POST/PUT(PATCH)/DELETE
+     ex)
+         /articles/1  - GET  => 1번글을 조회   
+         /articles    - POST => 글 작성
+         /articles/1  - PUT  => 1번글을 수정
+         /articles/1  - DELETE => 1번글을 삭제
+   -  /(슬래시)는 계층 관계를 표시
+   -  [_] 보다는 [-]를 사용 권장
+   -  Document / Collection : 둘다 자원(리소스)을 표현하는 방법
+      Document : 문서/객체 => 단수명사로 표시  
+      Collection : 문서의 집합/객체들의 집합 => 복수명사로 표시
+      
+      ex) /sport/soccer  => /sports/soccer
+      
+     	  /sports/soccer/players/99
+   
+     
+   * @ResponseBody => Spring 3지원 
+     @RestController => Spring 4지원
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     
