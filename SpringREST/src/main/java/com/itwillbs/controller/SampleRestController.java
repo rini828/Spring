@@ -7,6 +7,8 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -113,7 +115,7 @@ public class SampleRestController {
 	
 	// http://localhost:8088/sample/info
 	@RequestMapping(value = "/info",method = RequestMethod.POST)
-	public String doInfo(@RequestBody MemberVO vo) {
+	public String doInfo(@RequestBody MemberVO vo)  {
 		// @RequestBody : 브라우저에 전달되는 JSON데이터를 특정 객체로 자동변환
 		//                -데이터가 반드시 HTTP 바디(메서드)에 포함되어야함(GET방식 사용X)
 		logger.info(" doInfo() 실행 ");
@@ -122,8 +124,49 @@ public class SampleRestController {
 		
 		return "OK";
 	}
+	
+	// http://localhost:8088/sample/doG
+	@RequestMapping(value = "/doG",method = RequestMethod.GET)
+	public ResponseEntity<Void> doG() {
+		logger.info(" doG() 실행 ");
+		
+		// ResponseEntity : 데이터,HTTP상태코드를 직접 제어하는 클래스 
+		
+		//return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+	}
+	
+	// http://localhost:8088/sample/doH
+	@RequestMapping(value = "/doH",method = RequestMethod.GET)
+	public ResponseEntity<List<MemberVO>> doH() {
+		logger.info(" doH() 실행 ");
+		
+		List<MemberVO> memberList = new ArrayList<MemberVO>();
+
+		for (int i = 1; i <= 10; i++) {
+			MemberVO vo = new MemberVO();
+			vo.setUserid("admin" + i);
+			vo.setUsername("관리자" + i);
+			vo.setUserpw("1234" + i);
+			vo.setUseremail("admin" + i + "@admin.com");
+			memberList.add(vo);
+		}
+		
+		return new ResponseEntity<List<MemberVO>>(memberList,HttpStatus.OK);
+		
+//		
+//		if(true) {
+//			return new ResponseEntity<String>("ITWILL BUSAN",HttpStatus.OK);
+//		}
+//		else {
+//			return new ResponseEntity<String>("BUSAN ITWILL",HttpStatus.NOT_FOUND);
+//		}
+	}
 
 	
 	
+}	
 	
-}
+	
+	
+	
