@@ -29,7 +29,7 @@ ${pageVO } <br>
 					<tr>
 						<td>${vo.bno }</td>
 						<td>
-						<a href="/board/read">${vo.title }</td>
+						<a href="/board/read?bno=${vo.bno }">${vo.title }</td>
 						<td>${vo.writer }</td>
 						<td>
 						<fmt:formatDate value="${vo.regdate }" dateStyle="short" pattern="yy-MM-dd"/>
@@ -44,15 +44,25 @@ ${pageVO } <br>
 
 	<div class="box-footer clearfix">
 		<ul class="pagination pagination-sm no-margin pull-right">
-			<li><a href="#">«</a></li>
+		
+			<c:if test="${pageVO.prev }">
+				<li><a href="/board/listPage?page=${pageVO.startPage - 1 }">«</a></li>
+			</c:if>
 			
 			<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }" step="1">
-				<li><a href="/board/listPage?page=${i }">${i }</a></li>
+				<li ${pageVO.cri.page == i?  "class='active'":"" }>
+					<a href="/board/listPage?page=${i }">
+						${i }
+					</a>
+				</li>
 			</c:forEach>
+			
+			<c:if test="${pageVO.next }">
+				<li><a href="/board/listPage?page=${pageVO.endPage + 1 }">»</a></li>
+			</c:if>
 		</ul>
 	</div>
 </div>
-
 
 
 <script type="text/javascript">

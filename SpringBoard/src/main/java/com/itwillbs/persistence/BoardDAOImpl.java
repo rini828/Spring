@@ -16,15 +16,15 @@ import com.itwillbs.domain.Criteria;
 public class BoardDAOImpl implements BoardDAO {
 
 	private static final Logger logger = LoggerFactory.getLogger(BoardDAOImpl.class);
-
+	
 	@Inject
 	private SqlSession sqlSession;
-
-	private static final String NAMESPACE="com.itwillbs.mapper.BoardMapper";
 	
+	private static final String NAMESPACE ="com.itwillbs.mapper.BoardMapper";
+
 	@Override
 	public void insertBoard(BoardVO vo) throws Exception {
-		logger.debug(" insertBoard(BoardVO vo)");
+		logger.debug(" DAO : insertBoard(BoardVO vo)");
 		sqlSession.insert(NAMESPACE + ".insertBoard", vo);
 	}
 
@@ -40,12 +40,13 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectOne(NAMESPACE + ".getBoard",bno);
 	}
 
+	
 	@Override
 	public int updateBoard(BoardVO vo) throws Exception {
 		logger.debug(" DAO : updateBoard(BoardVO vo) ");
 		return sqlSession.update(NAMESPACE +".updateBoard", vo);
-	}	
-	
+	}
+
 	@Override
 	public void updateViewCnt(int bno) throws Exception {
 		logger.debug(" DAO : updateViewCnt(int bno) ");
@@ -71,11 +72,22 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.selectList(NAMESPACE + ".listPage",page);
 	}
 
+	
 	@Override
 	public List<BoardVO> getBoardListPage(Criteria cri) throws Exception {
 		logger.debug(" DAO : getBoardListPage(Criteria cri)");
 		return sqlSession.selectList(NAMESPACE + ".listPage", cri);
 	}
+
+	@Override
+	public int getBoardCount() throws Exception {
+		logger.debug(" DAO : getBoardCount() ");
+		return sqlSession.selectOne(NAMESPACE + ".countBoard");
+	}
+	
+	
+	
+	
 	
 	
 	

@@ -14,21 +14,21 @@ import com.itwillbs.persistence.BoardDAO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
-
+	
 	private static final Logger logger = LoggerFactory.getLogger(BoardServiceImpl.class);
-
+	
 	@Inject
 	private BoardDAO bdao;
 	
 	@Override
 	public void boardWrite(BoardVO vo) throws Exception {
-		logger.debug(" boardWrite(BoardVO vo) ");
-		bdao.insertBoard(vo);	
+		logger.debug(" S : boardWrite(BoardVO vo) ");
+		bdao.insertBoard(vo);		
 	}
-	
+
 	@Override
 	public List<BoardVO> boardListAll() throws Exception {
-		logger.debug(" S : boardListAll() ");
+		logger.debug(" S : boardListAll()");
 		return bdao.getBoardListAll();
 	}
 
@@ -49,7 +49,7 @@ public class BoardServiceImpl implements BoardService {
 		logger.debug(" S : incrementViewCnt(int bno) ");
 		bdao.updateViewCnt(bno);
 	}
-	
+
 	@Override
 	public void boardRemove(int bno) throws Exception {
 		logger.debug(" S : boardRemove(int bno) ");
@@ -61,6 +61,24 @@ public class BoardServiceImpl implements BoardService {
 		logger.debug(" S : boardListPage(Criteria cri) ");
 		return bdao.getBoardListPage(cri);
 	}
+
+	@Override
+	public int totalBoardCount() throws Exception {
+		logger.debug(" S : totalBoardCount()  ");
+		return bdao.getBoardCount();
+	}
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
 	
 	
 	

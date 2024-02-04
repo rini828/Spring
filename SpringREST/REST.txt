@@ -1,0 +1,93 @@
+REST.txt
+
+ URL : http://localhost:8080/member/join => 해당 리소스를 사용방법(찾아가는 방법) 
+ URI : /member/join  => 리소스
+
+REST (REpersentational State Transfer) : 하나의 주소(URI)는 하나의 고유한 데이터(리소스)를 대표한다
+  =>  URL을 설계하는 방법 
+  
+  
+  이전 웹 : 서버에서 생성된 데이터를 브라우저에서 출력
+     ||
+  요즘 웹 : 서버에서 생성된 데이터를 다양한 기기(웹/모바일)에 사용 (데이터만 전달)
+  
+  https://learn.microsoft.com/ko-kr/azure/architecture/best-practices/api-design
+  https://www.youtube.com/watch?v=RP_f5dMoHFc
+ * REST API 특징
+    - 서버/클라이언트 구조
+    - 무상태
+    - 캐시처리 가능
+    - 계층화
+    - 인터페이스 일관성
+    
+   
+  * REST API를 사용하는 방법
+   - 주소만보고 해당 요청의 내용을 파악가능 해야함
+   - URL 작성시에 동사 -> 명사 사용해야함
+     ex) /getMember?id=10 (x)
+         /member/1  (o)
+   - URL 작성시 동작은(동사) HTTP 메서드로 결정
+     - GET/POST/PUT(PATCH)/DELETE
+     ex)
+         /articles/1  - GET  => 1번글을 조회   
+         /articles    - POST => 글 작성
+         /articles/1  - PUT  => 1번글을 수정
+         /articles/1  - DELETE => 1번글을 삭제
+   -  /(슬래시)는 계층 관계를 표시
+   -  [_] 보다는 [-]를 사용 권장
+   -  Document / Collection : 둘다 자원(리소스)을 표현하는 방법
+      Document : 문서/객체 => 단수명사로 표시  
+      Collection : 문서의 집합/객체들의 집합 => 복수명사로 표시
+      
+      ex) /sport/soccer  => /sports/soccer
+      
+     	  /sports/soccer/players/99
+   
+     
+   * @ResponseBody => Spring 3지원 
+     @RestController => Spring 4지원
+    
+    
+
+
+0105    
+    
+   REST방식은 view가 없어서 상태확인이 어려움
+   -> HTTP status code 사용해서 상태 체크
+   
+   * HTTP 상태 코드 https://developer.mozilla.org/ko/docs/Web/HTTP/Status
+   
+   - 100 번대 : 현재 데이터의 처리중인 상태
+     100 : 데이터중의 일부를 서버가 전달받은 상태
+     
+     200 번대 : 정상적인 응답
+     200 : 에러없이 정상처리
+     204 : 정상처리 되었으나 서버에서 보내줄 정보가 없는경우
+     
+   - 300 번대 : URL 처리 상태
+     301 : 요청한 페이지가 다른 URL(new)로 변경
+     304 : 기존에 실행한 데이터와 변경사항이 없음
+     
+   - 400 번대 : 서버에서 인식불가
+     400 : 전송된 요청(request)에 문제가 발생한 경우 / 서버에서 인식 불가능 (ajax/date)
+     403 : 서버에서 페이지에 대한 권한이 없을때
+     404 : URL에 해당하는 리소스가 없는 경우
+     405 : 전송방식이 허락되지 않음 (REST방식 주로 발생)
+     
+   - 500 번대 : 서버 내부문제 발생
+     500 : 서버에서 처리시에 발생하는 문제 (문법오류, 컴파일오류, 런타임오류)
+     502 : 게이트웨이/프록시 상태의 문제(과부화)
+     503 : 일시적인 서버 과부화 / 서비스 중단상태 
+     504 : 지정된 처리시간이 지나서 처리하지 못함
+      
+     
+     https://www.postman.com/downloads/?utm_source=postman-home
+    
+    
+    
+    
+    
+    
+    
+    
+     

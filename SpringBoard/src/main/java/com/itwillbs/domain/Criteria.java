@@ -9,8 +9,6 @@ public class Criteria {
 	private int page;
 	private int pageSize;
 	
-
-	
 	public Criteria() {
 		this.page = 1;
 		this.pageSize = 10;
